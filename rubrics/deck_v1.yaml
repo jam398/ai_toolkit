@@ -1,0 +1,93 @@
+# Artifact Critic - Presentation Deck Rubric
+
+version: "1.0"
+rubric_id: "deck_v1"
+name: "Presentation Deck Review Rubric"
+description: "Evaluates slide decks for story flow, visual hierarchy, and presentation effectiveness"
+
+target_score: 85
+max_score: 100
+
+categories:
+  - id: "story_flow"
+    name: "Story Flow & Narrative"
+    weight: 25
+    criteria:
+      - "Clear opening that sets context and stakes"
+      - "Logical progression from problem → solution → impact"
+      - "Each slide builds on previous (no jarring jumps)"
+      - "Strong conclusion with clear takeaways/call-to-action"
+      - "Consistent narrative thread throughout"
+  
+  - id: "visual_hierarchy"
+    name: "Visual Hierarchy & Design"
+    weight: 25
+    criteria:
+      - "One main point per slide (not cluttered)"
+      - "Font sizes create clear hierarchy (title > body > notes)"
+      - "Consistent color scheme and branding"
+      - "High contrast for readability"
+      - "Visuals support (not distract from) message"
+  
+  - id: "content_density"
+    name: "Content Density"
+    weight: 20
+    criteria:
+      - "Follows 6x6 rule (max 6 bullets, 6 words each) or better"
+      - "No walls of text or tiny fonts"
+      - "Uses visuals (charts, diagrams, icons) to replace text"
+      - "White space used effectively"
+      - "Speaker notes contain additional detail (not on slides)"
+  
+  - id: "data_visualization"
+    name: "Data & Visuals"
+    weight: 15
+    criteria:
+      - "Charts have clear titles and labels"
+      - "Data sources cited"
+      - "Appropriate chart types for data"
+      - "Images are high resolution (not pixelated)"
+      - "Icons and graphics are professional"
+  
+  - id: "accessibility"
+    name: "Accessibility & Professionalism"
+    weight: 15
+    criteria:
+      - "Sufficient color contrast (WCAG AA minimum)"
+      - "Text readable from distance (min 24pt for body)"
+      - "No grammar or spelling errors"
+      - "Consistent formatting across slides"
+      - "Professional tone and language"
+
+severity_mapping:
+  blocker:
+    - "Secrets or credentials visible in screenshots"
+    - "Multiple spelling errors in titles"
+    - "Completely unreadable text (too small/low contrast)"
+  high:
+    - "No clear narrative or flow"
+    - "Slides overloaded with text (10+ bullets)"
+    - "Missing critical context or conclusion"
+    - "Data visualizations lack labels/sources"
+  medium:
+    - "Inconsistent formatting"
+    - "Could improve visual hierarchy"
+    - "Some slides too dense"
+    - "Minor contrast issues"
+  low:
+    - "Could add one supporting visual"
+    - "Minor spacing adjustments"
+    - "Optional animation suggestions"
+
+common_findings:
+  - evidence: "Slide has 12 bullet points with long text"
+    category: "content_density"
+    severity: "high"
+    recommendation: "Break into 2-3 slides or use visual representation"
+    suggested_rewrite: "Create one slide per main idea with 3-4 bullets max"
+  
+  - evidence: "Chart has no title or axis labels"
+    category: "data_visualization"
+    severity: "high"
+    recommendation: "Add descriptive title and label all axes with units"
+    suggested_rewrite: "Title: 'Revenue Growth 2020-2025 (in millions)' + labeled axes"

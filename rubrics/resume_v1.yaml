@@ -1,0 +1,97 @@
+# Artifact Critic - Rubric Definitions
+#
+# Each rubric defines criteria for evaluating a specific artifact type.
+# Rubrics are versioned to allow evolution while maintaining consistency.
+
+version: "1.0"
+rubric_id: "resume_v1"
+name: "Resume Review Rubric"
+description: "ATS-optimized resume review focusing on impact, quantification, and structure"
+
+target_score: 85
+max_score: 100
+
+categories:
+  - id: "ats_compatibility"
+    name: "ATS Compatibility"
+    weight: 25
+    criteria:
+      - "Uses standard section headings (Experience, Education, Skills)"
+      - "Avoids tables, text boxes, headers/footers"
+      - "Uses standard fonts (Arial, Calibri, Times New Roman)"
+      - "Has clear contact information at top"
+      - "File format is .pdf or .docx"
+  
+  - id: "impact_bullets"
+    name: "Impact & Achievement Bullets"
+    weight: 30
+    criteria:
+      - "Uses strong action verbs (Led, Built, Increased, Reduced)"
+      - "Quantifies achievements with numbers/percentages"
+      - "Shows impact/results, not just responsibilities"
+      - "Follows [Action Verb] + [What] + [How/Why] + [Result] structure"
+      - "Avoids weak phrases like 'responsible for' or 'helped with'"
+  
+  - id: "structure"
+    name: "Structure & Organization"
+    weight: 20
+    criteria:
+      - "Fits on 1 page (or 2 pages if 10+ years experience)"
+      - "Sections in optimal order (Summary/Experience/Education/Skills)"
+      - "Consistent formatting (fonts, spacing, bullet styles)"
+      - "Proper use of white space (not cramped or too sparse)"
+      - "Dates formatted consistently (MM/YYYY or Mon YYYY)"
+  
+  - id: "grammar_tense"
+    name: "Grammar & Tense Consistency"
+    weight: 15
+    criteria:
+      - "Current role in present tense, past roles in past tense"
+      - "No spelling or grammar errors"
+      - "Consistent punctuation (periods at end of bullets or none)"
+      - "No first-person pronouns (I, me, my)"
+      - "Professional tone throughout"
+  
+  - id: "relevance"
+    name: "Relevance & Targeting"
+    weight: 10
+    criteria:
+      - "Skills match target role requirements"
+      - "Most relevant experience emphasized"
+      - "Keywords from job description present"
+      - "Unnecessary details omitted"
+      - "Technical skills section present and relevant"
+
+severity_mapping:
+  blocker:
+    - "Missing contact information"
+    - "Multiple spelling errors"
+    - "Unprofessional email address"
+    - "Secrets or sensitive data exposed"
+  high:
+    - "No quantified achievements"
+    - "Inconsistent tense usage"
+    - "Poor ATS compatibility (tables, graphics)"
+    - "Exceeds 2 pages"
+  medium:
+    - "Weak action verbs"
+    - "Missing keywords"
+    - "Formatting inconsistencies"
+    - "Unclear dates"
+  low:
+    - "Minor spacing issues"
+    - "Could strengthen one bullet"
+    - "Optional section could be added"
+
+common_findings:
+  - evidence: "Bullet starts with 'Responsible for...'"
+    category: "impact_bullets"
+    severity: "medium"
+    recommendation: "Replace with strong action verb + quantified achievement"
+    suggested_rewrite: "Led team of X to achieve Y, resulting in Z% improvement"
+  
+  - evidence: "No numbers in achievement bullets"
+    category: "impact_bullets"
+    severity: "high"
+    recommendation: "Add quantifiable metrics (%, $, #) to demonstrate impact"
+    suggested_rewrite: "Increased sales by 35% through implementation of..."

@@ -1,0 +1,94 @@
+# Artifact Critic - UI/UX Review Rubric
+
+version: "1.0"
+rubric_id: "ui_v1"
+name: "UI/UX Screenshot Review Rubric"
+description: "Evaluates user interface designs for usability, consistency, and accessibility"
+
+target_score: 85
+max_score: 100
+
+categories:
+  - id: "usability"
+    name: "Usability & User Flow"
+    weight: 30
+    criteria:
+      - "Primary actions are obvious and accessible"
+      - "Navigation is clear and intuitive"
+      - "User knows where they are (breadcrumbs, active states)"
+      - "Error states provide helpful guidance"
+      - "Empty states explain what to do next"
+  
+  - id: "visual_consistency"
+    name: "Visual Consistency"
+    weight: 20
+    criteria:
+      - "Consistent button styles and sizes"
+      - "Uniform spacing and alignment"
+      - "Cohesive color palette"
+      - "Consistent typography (font families, sizes, weights)"
+      - "Icons follow same style system"
+  
+  - id: "accessibility"
+    name: "Accessibility"
+    weight: 25
+    criteria:
+      - "Text contrast meets WCAG AA (4.5:1 for normal text)"
+      - "Clickable elements minimum 44x44px (mobile) or 24x24px (desktop)"
+      - "Forms have clear labels and error messages"
+      - "Focus states visible for keyboard navigation"
+      - "Text is readable (min 14px for body)"
+  
+  - id: "information_architecture"
+    name: "Information Architecture"
+    weight: 15
+    criteria:
+      - "Content hierarchy is clear"
+      - "Related items grouped logically"
+      - "Appropriate use of white space"
+      - "No overwhelming information density"
+      - "Scannable layout (F-pattern or Z-pattern)"
+  
+  - id: "edge_cases"
+    name: "Edge Cases & States"
+    weight: 10
+    criteria:
+      - "Loading states clearly indicated"
+      - "Error states are informative"
+      - "Empty states guide user action"
+      - "Success feedback provided"
+      - "Long content handles gracefully (truncation, scrolling)"
+
+severity_mapping:
+  blocker:
+    - "Critical action button invisible or inaccessible"
+    - "Text completely unreadable (contrast < 2:1)"
+    - "Secrets/API keys visible in UI"
+    - "Broken layout (overlapping elements)"
+  high:
+    - "Contrast ratio fails WCAG AA"
+    - "No error state guidance"
+    - "Primary CTA not obvious"
+    - "Navigation unclear"
+  medium:
+    - "Inconsistent button styles"
+    - "Missing focus states"
+    - "Spacing irregularities"
+    - "Could improve hierarchy"
+  low:
+    - "Minor alignment issue"
+    - "Could add empty state"
+    - "Optional animation"
+
+common_findings:
+  - evidence: "Submit button has white text on light blue background"
+    category: "accessibility"
+    severity: "high"
+    recommendation: "Increase contrast to meet WCAG AA minimum (4.5:1)"
+    suggested_rewrite: "Use darker blue (#0056b3) or white text on darker background"
+  
+  - evidence: "Error message says 'Error occurred' with no details"
+    category: "usability"
+    severity: "high"
+    recommendation: "Provide specific error explanation and recovery steps"
+    suggested_rewrite: "Email format is invalid. Please enter a valid email address (e.g., user@example.com)"

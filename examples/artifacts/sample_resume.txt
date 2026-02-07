@@ -1,0 +1,27 @@
+JOHN DOE
+Software Engineer
+Email: john@example.com | Phone: (555) 123-4567
+
+SUMMARY
+I am a software engineer with experience in various technologies.
+
+EXPERIENCE
+ABC Company - Software Developer
+January 2020 - Present
+- Worked on projects
+- Used JavaScript and Python
+- Collaborated with team members
+
+XYZ Startup - Junior Developer
+June 2018 - December 2019
+- Built features
+- Fixed bugs
+- Attended meetings
+
+EDUCATION
+State University
+Bachelor of Science in Computer Science
+2014 - 2018
+
+SKILLS
+JavaScript, Python, Java, SQL, Git

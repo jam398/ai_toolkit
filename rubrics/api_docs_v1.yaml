@@ -1,0 +1,97 @@
+# Artifact Critic - API Documentation Rubric
+
+version: "1.0"
+rubric_id: "api_docs_v1"
+name: "API Documentation Review Rubric"
+description: "Evaluates API documentation for completeness, correctness, and developer experience"
+
+target_score: 85
+max_score: 100
+
+categories:
+  - id: "completeness"
+    name: "Completeness"
+    weight: 30
+    criteria:
+      - "All endpoints documented with method, path, description"
+      - "Request/response schemas fully specified"
+      - "Query parameters and headers documented"
+      - "Error codes and responses explained"
+      - "Rate limits and pagination covered"
+  
+  - id: "examples"
+    name: "Examples & Code Samples"
+    weight: 25
+    criteria:
+      - "Working code examples in multiple languages"
+      - "Example requests and responses for each endpoint"
+      - "Edge cases demonstrated"
+      - "Authentication flow examples"
+      - "Examples use realistic data"
+  
+  - id: "authentication"
+    name: "Authentication & Security"
+    weight: 20
+    criteria:
+      - "Auth methods clearly explained (API key, OAuth, JWT)"
+      - "How to obtain and refresh credentials"
+      - "Security best practices documented"
+      - "No actual secrets/keys in examples"
+      - "HTTPS requirement stated"
+  
+  - id: "correctness"
+    name: "Correctness & Accuracy"
+    weight: 15
+    criteria:
+      - "Endpoints match actual API behavior"
+      - "Data types correctly specified"
+      - "Required vs optional fields clear"
+      - "Status codes accurate"
+      - "No outdated information"
+  
+  - id: "organization"
+    name: "Organization & Searchability"
+    weight: 10
+    criteria:
+      - "Logical grouping of endpoints"
+      - "Table of contents or navigation"
+      - "Searchable"
+      - "Quick start guide present"
+      - "Versioning clearly indicated"
+
+severity_mapping:
+  blocker:
+    - "Actual API keys or secrets in examples"
+    - "Critical endpoint completely missing"
+    - "Authentication not explained"
+  high:
+    - "No request/response examples"
+    - "Error responses not documented"
+    - "Required fields not specified"
+    - "Incorrect data types"
+  medium:
+    - "Missing code examples for some languages"
+    - "Edge cases not covered"
+    - "Could improve organization"
+    - "Rate limits not mentioned"
+  low:
+    - "Could add more examples"
+    - "Minor formatting inconsistencies"
+    - "Optional: add diagrams"
+
+common_findings:
+  - evidence: "Endpoint documented but no example request shown"
+    category: "examples"
+    severity: "high"
+    recommendation: "Add complete curl or HTTP request example with headers"
+    suggested_rewrite: |
+      curl -X POST https://api.example.com/v1/users \
+        -H "Authorization: Bearer YOUR_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"name": "John Doe", "email": "john@example.com"}'
+  
+  - evidence: "Example shows actual API key 'sk-abc123xyz...'"
+    category: "authentication"
+    severity: "blocker"
+    recommendation: "Replace with placeholder and add security warning"
+    suggested_rewrite: "Use 'YOUR_API_KEY' or 'sk-xxxxxxxxxxxxxxxx' as placeholder"
