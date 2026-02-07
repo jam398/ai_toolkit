@@ -1,3 +1,34 @@
+# AI Toolkit
+
+A comprehensive suite of AI-powered tools for research, artifact review, and media analysis. Features intelligent library management, multimodal artifact critique with Gemini, and automated image/video/audio analysis.
+
+## 📦 What's Inside
+
+This toolkit contains three powerful AI agents:
+
+1. **[Library Research Agent](#library-research-agent)** - Curated knowledge library with intelligent web search fallback
+2. **[Artifact Critic](#artifact-critic-gemini-multimodal-feedback)** - Gemini-powered multimodal review for PDFs, images, and presentations
+3. **[Media Analyzer](#media-analyzer-imagevideoadio-analysis)** - AI-powered analysis of images, videos, and audio files
+
+## 🗂️ Table of Contents
+
+- [Library Research Agent](#library-research-agent)
+  - [Features](#-key-features)
+  - [Quick Start](#-quick-start)
+  - [Usage](#-usage-examples)
+- [Artifact Critic](#artifact-critic-gemini-multimodal-feedback)
+  - [Features](#-what-it-does)
+  - [Quick Start](#-setup)
+  - [Usage](#-basic-usage)
+- [Media Analyzer](#media-analyzer-imagevideoadio-analysis)
+  - [Features](#-key-features-2)
+  - [Quick Start](#-quick-start-2)
+  - [Usage](#-usage-examples-1)
+- [Configuration](#configuration)
+- [Security](#-security-first)
+
+---
+
 # Library Research Agent
 
 An AI-powered research assistant that maintains a curated knowledge library and intelligently uses web search only when needed. Featured with automatic citation, source quality control, and freshness management.
@@ -25,15 +56,17 @@ An AI-powered research assistant that maintains a curated knowledge library and 
 ## 📋 Requirements
 
 - Python 3.9+
-- OpenAI API key (with access to GPT-4 and web search)
-- ~50MB disk space for library storage
+- **OpenAI API key** (for Library Research Agent - GPT-4 with web search)
+- **Gemini API key** (for Artifact Critic and Media Analyzer)
+- ~50MB disk space for library and media storage
 
 ## 🚀 Quick Start
 
 ### 1. Clone and Setup
 
 ```bash
-cd project
+git clone git@github.com:jam398/ai_toolkit.git
+cd ai_toolkit
 python -m venv venv
 
 # Windows
@@ -51,14 +84,19 @@ pip install -r requirements.txt
 # Copy the example file
 copy .env.example .env
 
-# Edit .env and add your OpenAI API key
+# Edit .env and add your API keys
 # NEVER commit .env to version control!
 ```
 
 Edit `.env`:
 ```env
-OPENAI_API_KEY=sk-your-actual-key-here
+OPENAI_API_KEY=sk-your-actual-openai-key-here
+GEMINI_API_KEY=your-actual-gemini-key-here
 ```
+
+**Where to get API keys:**
+- OpenAI: https://platform.openai.com/api-keys
+- Gemini: https://aistudio.google.com/apikey
 
 ### 3. Run the Agent
 
