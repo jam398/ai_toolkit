@@ -1,14 +1,13 @@
 # AI Toolkit
 
-A comprehensive suite of AI-powered tools for research, artifact review, and media analysis. Features intelligent library management, multimodal artifact critique with Gemini, and automated image/video/audio analysis.
+A comprehensive suite of AI-powered tools for research and artifact review. Features intelligent library management and multimodal artifact critique with Gemini for PDFs, images, videos, audio, and presentations.
 
 ## 📦 What's Inside
 
-This toolkit contains three powerful AI agents:
+This toolkit contains two powerful AI agents:
 
 1. **[Library Research Agent](#library-research-agent)** - Curated knowledge library with intelligent web search fallback
-2. **[Artifact Critic](#artifact-critic-gemini-multimodal-feedback)** - Gemini-powered multimodal review for PDFs, images, and presentations
-3. **[Media Analyzer](#media-analyzer-imagevideoadio-analysis)** - AI-powered analysis of images, videos, and audio files
+2. **[Artifact Critic](#artifact-critic-gemini-multimodal-feedback)** - Gemini-powered multimodal review for PDFs, images, videos, audio, and presentations
 
 ## 🗂️ Table of Contents
 
@@ -20,10 +19,7 @@ This toolkit contains three powerful AI agents:
   - [Features](#-what-it-does)
   - [Quick Start](#-setup)
   - [Usage](#-basic-usage)
-- [Media Analyzer](#media-analyzer-imagevideoadio-analysis)
-  - [Features](#-key-features-2)
-  - [Quick Start](#-quick-start-2)
-  - [Usage](#-usage-examples-1)
+  - [Media Analysis](#media-analysis-with-artifact-critic)
 - [Configuration](#configuration)
 - [Security](#-security-first)
 
@@ -452,11 +448,11 @@ For issues or questions:
 
 # Artifact Critic (Gemini 3 Multimodal Feedback)
 
-An AI-powered artifact reviewer that provides structured, actionable feedback on PDFs, slide decks, screenshots, and diagrams using Google's Gemini 3 multimodal capabilities.
+An AI-powered artifact reviewer that provides structured, actionable feedback on PDFs, images, videos, audio, slide decks, and diagrams using Google's Gemini multimodal capabilities.
 
 ## 🎯 Key Features
 
-- **Multimodal Review**: Analyzes PDFs, PowerPoint, images with visual understanding
+- **Multimodal Review**: Analyzes PDFs, PowerPoint, images, videos, and audio with visual and content understanding
 - **Structured Rubrics**: Version-controlled YAML rubrics for consistent evaluation
 - **Actionable Feedback**: Evidence + Location + Recommendation + Suggested rewrites
 - **Repair Loop**: Iterative improvement until quality threshold met
@@ -470,6 +466,9 @@ An AI-powered artifact reviewer that provides structured, actionable feedback on
 - **Slide Decks**: Visual hierarchy, messaging clarity, flow
 - **UI Mockups**: Accessibility, consistency, information architecture
 - **API Docs**: Completeness, code examples, error handling
+- **Images**: Technical quality, composition, accessibility descriptions
+- **Videos**: Content analysis, quality assessment, accessibility
+- **Audio**: Content transcription and analysis
 
 ## 🚀 Quick Start
 
@@ -822,45 +821,20 @@ for file_path in glob.glob("resumes/*.pdf"):
 
 **Remember**: This agent is a critic, not a creator. Use it to refine and polish, not to generate from scratch! 🎨✨
 
----
+## Media Analysis with Artifact Critic
 
-# Media Analyzer (Image/Video/Audio Analysis)
+The Artifact Critic includes a dedicated media analyzer for images, videos, and audio files. Use `scripts/media_analyzer.py` to generate comprehensive AI-powered analyses.
 
-An AI-powered media analysis tool that uses Gemini's multimodal capabilities to analyze and describe images, videos, and audio files. Stores analyses separately from the main knowledge library for easy organization.
-
-## 🎯 Key Features
+### 🎯 Media Analysis Features
 
 - **Multimodal Analysis**: Analyzes images, videos, and audio using Gemini
-- **Separate Storage**: Media analyses stored independently from library
+- **Separate Storage**: Media analyses stored independently in `media_data/`
 - **Batch Processing**: Analyze entire directories at once
 - **Structured Analysis**: 6-part comprehensive analysis (description, technical quality, mood, elements, uses, accessibility)
-- **File Support**: JPG, PNG, GIF, BMP, WEBP (more formats coming)
+- **File Support**: JPG, PNG, GIF, BMP, WEBP
 - **CLI & Interactive**: Multiple input modes for flexibility
 
-## 📦 Storage Organization
-
-**Media analyses are separate from the library:**
-
-```
-library_data/           # Research & knowledge entries
-  └── entries.json      # Library Research Agent content
-
-media_data/             # Image/video/audio analyses  
-  └── analyses.json     # Media Analyzer content
-```
-
-This separation keeps your research library focused on knowledge while media analyses are organized independently.
-
-## 🚀 Quick Start
-
-### 1. Ensure Gemini API Key
-
-Edit your `.env` file:
-```
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-### 2. Analyze Media
+### 📊 Usage Examples
 
 **Single Image:**
 ```bash
@@ -882,104 +856,26 @@ python scripts/media_analyzer.py --file img1.jpg --file img2.png --file img3.web
 python scripts/media_analyzer.py
 ```
 
-**Analyze Without Saving:**
-```bash
-python scripts/media_analyzer.py --file image.jpg --no-save
-```
-
-### 3. View Media Analyses
-
+**View All Analyses:**
 ```bash
 python view_media.py
 ```
 
-This displays:
-- Total analyses by type
-- Recent analyses
-- All stored analyses with previews
+### 📦 Storage Organization
 
-## 📊 Analysis Structure
-
-Each media analysis includes:
-
-1. **Description**: What's in the media
-2. **Technical Quality**: Composition, lighting, colors, focus
-3. **Mood/Atmosphere**: Emotional feeling conveyed
-4. **Interesting Elements**: Noteworthy details or patterns
-5. **Potential Uses**: Where it could be used effectively
-6. **Accessibility**: Description for those who can't see/hear it
-
-## 📖 Usage Examples
-
-### Analyze Screenshots for Documentation
-
-```bash
-# Analyze all screenshots
-python scripts/media_analyzer.py --directory ./screenshots/
-
-# View results
-python view_media.py
-```
-
-### Interactive Analysis
+Media analyses are stored separately from the library:
 
 ```
-python scripts/media_analyzer.py
+library_data/           # Research & knowledge entries
+  └── entries.json      # Library Research Agent content
 
-Options:
-  1. Analyze a single image file
-  2. Analyze all images in a directory
-  3. Analyze multiple specific files
-
-Choose option (1-3): 2
-Enter directory path: ./examples/artifacts/
-
-Found 5 images...
-✓ Analyzed: image1.jpg
-✓ Analyzed: image2.png
-...
+media_data/             # Image/video/audio analyses  
+  └── analyses.json     # Media analysis results
 ```
 
-### Programmatic Access
+This separation keeps your research library focused on knowledge while media analyses are organized independently.
 
-```python
-from media_store import MediaStore
-
-store = MediaStore("./media_data")
-
-# Get statistics
-stats = store.get_statistics()
-print(f"Total analyses: {stats['total_analyses']}")
-print(f"Images: {stats['by_type']['image']}")
-
-# Search by filename
-results = store.search_by_filename("screenshot")
-for analysis in results:
-    print(f"{analysis.filename}: {analysis.analysis_text[:100]}...")
-
-# Get all image analyses
-images = store.search_by_type("image")
-```
-
-## 🔧 Integration with Other Tools
-
-**Research → Analyze → Document Workflow:**
-
-```bash
-# 1. Research visual design principles
-python main.py -q "What are accessible UI design principles?"
-
-# 2. Analyze your UI mockup
-python scripts/media_analyzer.py --file ui_mockup.png
-
-# 3. Review for quality (using Artifact Critic)
-python artifact_critic.py review ui_mockup.png --rubric ui_v1
-
-# 4. View all media analyses
-python view_media.py
-```
-
-## 📐 Architecture
+### 📐 Architecture
 
 ```
 scripts/media_analyzer.py   # Main CLI for media analysis
@@ -988,33 +884,6 @@ media_data/                 # Separate storage directory
   └── analyses.json         # Media analyses (not in library)
 view_media.py               # Utility to browse analyses
 ```
-
-## ⚙️ Configuration
-
-Media analyses use these config settings:
-
-```python
-# Model (in config.py or .env)
-GEMINI_MODEL = "gemini-2.0-flash"
-
-# Storage location (default)
-MEDIA_DATA_PATH = "./media_data"
-```
-
-## 🐛 Troubleshooting
-
-### "GEMINI_API_KEY not found"
-- Ensure `.env` file has `GEMINI_API_KEY=your_key`
-- Get a key at: https://aistudio.google.com/apikey
-
-### "No images found in directory"
-- Check supported formats: JPG, JPEG, PNG, GIF, BMP, WEBP
-- Ensure files have correct extensions
-
-### "Analysis failed"
-- Check image file isn't corrupted
-- Verify file size isn't too large (keep under 20MB)
-- Ensure Gemini API quota isn't exceeded
 
 ---
 
